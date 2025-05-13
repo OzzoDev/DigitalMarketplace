@@ -22,8 +22,19 @@ const Page = () => {
     formState: { errors },
   } = useForm<TAuthCredentialsValidator>({ resolver: zodResolver(AuthCredentialsValidator) })
 
+  const { mutate, isPending } = trpc.auth.createPayloadUser.useMutation({
+    onError: (error) => {
+      console.error('Mutation error:', error)
+      // Optionally, display error to the user
+    },
+    onSuccess: (data) => {
+      console.log('Mutation success:', data)
+      // Optionally, redirect or update UI
+    },
+  })
+
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    //send data to server
+    mutate({ email, password })
   }
 
   return (
@@ -58,6 +69,7 @@ const Page = () => {
                   <Label htmlFor="password">Password</Label>
                   <Input
                     {...register('password')}
+                    type="password"
                     className={cn({ 'focus-visible:ring-red-500': errors.password })}
                     placeholder="Password"
                   />
