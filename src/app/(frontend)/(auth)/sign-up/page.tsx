@@ -25,11 +25,6 @@ const Page = () => {
   const { mutate, isPending } = trpc.auth.createPayloadUser.useMutation({
     onError: (error) => {
       console.error('Mutation error:', error)
-      // Optionally, display error to the user
-    },
-    onSuccess: (data) => {
-      console.log('Mutation success:', data)
-      // Optionally, redirect or update UI
     },
   })
 
@@ -55,7 +50,7 @@ const Page = () => {
           </div>
 
           <div className="grid gap-6">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} method="POST">
               <div className="grid gap-2">
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="email">Email</Label>
