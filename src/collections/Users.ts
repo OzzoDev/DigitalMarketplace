@@ -5,7 +5,14 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  auth: true,
+  auth: {
+    verify: {
+      generateEmailHTML: ({ token, user }) => {
+        return `<p>Hello ${user.email}, please verify your email by clicking</p>`
+      },
+      generateEmailSubject: () => 'Please verify your email',
+    },
+  },
   access: {
     read: () => true,
     create: () => true,
