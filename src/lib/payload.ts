@@ -1,30 +1,26 @@
 import payload, { Payload } from 'payload'
 import config from '../payload.config'
 
-let cached = (globalThis as any).payload
+declare global {
+  var cachedPayloadClient: Payload | undefined
+  var payloadInitialized: boolean | undefined
+}
 
-if (!cached) {
-  cached = (globalThis as any).payload = {
-    client: null,
-    promise: null,
-  }
+const globalForPayload = globalThis as typeof globalThis & {
+  cachedPayloadClient: Payload
+  payloadInitialized: boolean
 }
 
 export const getPayloadClient = async (): Promise<Payload> => {
-  if (cached.client) {
-    return cached.client
+  if (globalForPayload.cachedPayloadClient) {
+    return globalForPayload.cachedPayloadClient
   }
 
-  if (!cached.promise) {
-    cached.promise = payload.init({ config })
+  if (!globalForPayload.payloadInitialized) {
+    globalForPayload.payloadInitialized = true
+    await payload.init({ config })
+    globalForPayload.cachedPayloadClient = payload
   }
 
-  try {
-    cached.client = await cached.promise
-  } catch (e) {
-    cached.promise = null
-    throw e
-  }
-
-  return cached.client
+  return globalForPayload.cachedPayloadClient
 }

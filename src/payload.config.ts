@@ -9,10 +9,17 @@ import { Media } from './collections/Media'
 import { Users } from './collections/Users'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
+import mongoose from 'mongoose'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// 🧼 Clean all registered models to avoid OverwriteModelError
+Object.keys(mongoose.models).forEach((modelName) => {
+  delete mongoose.models[modelName]
+})
+
+// ✅ now build config cleanly
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -20,6 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  // No global hooks — but this happens before config is used
   email: nodemailerAdapter({
     defaultFromAddress: 'onboarding@resend.dev',
     defaultFromName: 'DigitalHippo',

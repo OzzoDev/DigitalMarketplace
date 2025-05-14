@@ -1,12 +1,10 @@
-import { type FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
-import { NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 
-export const createContext = async ({ req }: FetchCreateContextFnOptions) => {
-  const res = new NextResponse()
+export const createContext = async () => {
+  const resCookies = await cookies()
 
   return {
-    req,
-    res,
+    resCookies,
   }
 }
 

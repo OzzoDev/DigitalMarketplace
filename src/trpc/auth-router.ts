@@ -8,8 +8,6 @@ export const authRouter = router({
   createPayloadUser: publicProcedure.input(AuthCredentialsValidator).mutation(async ({ input }) => {
     const { email, password } = input
 
-    console.log('Hello')
-
     const payload = await getPayloadClient()
 
     const { docs: users } = await payload.find({
@@ -59,7 +57,7 @@ export const authRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const { token, exp } = await payload.login({
+      const { token, exp, user } = await payload.login({
         collection: 'users',
         data: {
           email,
@@ -69,7 +67,7 @@ export const authRouter = router({
 
       if (!token) throw new Error('Login failed: token not returned')
 
-      ctx.res.cookies.set('payload-token', token, {
+      ctx.resCookies.set('payload-token', token, {
         httpOnly: true,
         path: '/',
         sameSite: 'lax',
