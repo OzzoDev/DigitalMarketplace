@@ -56,18 +56,30 @@ export const authRouter = router({
 
   signIn: publicProcedure.input(AuthCredentialsValidator).mutation(async ({ input, ctx }) => {
     const { email, password } = input
-    const { req } = ctx
     const payload = await getPayloadClient()
 
     try {
-      await payload.login({
+      const { token, exp } = await payload.login({
         collection: 'users',
         data: {
           email,
           password,
         },
-        req,
       })
-    } catch (err) {}
+
+      if (!token) throw new Error('Login failed: token not returned')
+
+      ctx.res.cookies.set('payload-token', token, {
+        httpOnly: true,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        expires: new Date((exp ?? Date.now() / 1000 + 60 * 60 * 24 * 7) * 1000),
+      })
+
+      return { success: true }
+    } catch (err) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
   }),
 })
