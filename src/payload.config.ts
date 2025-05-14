@@ -14,12 +14,11 @@ import mongoose from 'mongoose'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-// 🧼 Clean all registered models to avoid OverwriteModelError
+// Clean all registered models to avoid OverwriteModelError
 Object.keys(mongoose.models).forEach((modelName) => {
   delete mongoose.models[modelName]
 })
 
-// ✅ now build config cleanly
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -27,7 +26,6 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  // No global hooks — but this happens before config is used
   email: nodemailerAdapter({
     defaultFromAddress: 'onboarding@resend.dev',
     defaultFromName: 'DigitalHippo',
@@ -48,7 +46,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: process.env.DATABASE_URI || false,
   }),
   sharp,
   plugins: [payloadCloudPlugin()],

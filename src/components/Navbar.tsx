@@ -6,6 +6,7 @@ import { Icons } from './Icons'
 import Cart from './Cart'
 import { getServerSideUser } from '@/lib/payload-utils'
 import { cookies } from 'next/headers'
+import UserAccountNav from './UserAccountNav'
 
 const Navbar = async () => {
   const nextCookies = await cookies()
@@ -40,7 +41,7 @@ const Navbar = async () => {
                   {user ? null : <span className="h-6 w-px bg-gray-200" aria-hidden="true" />}
 
                   {user ? (
-                    <p></p>
+                    <UserAccountNav user={user} />
                   ) : (
                     <Link href="/sign-up" className={buttonVariants({ variant: 'ghost' })}>
                       Create account
