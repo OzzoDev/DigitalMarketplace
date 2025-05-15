@@ -5,11 +5,14 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-import { Media } from './collections/Media'
 import { Users } from './collections/Users'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import mongoose from 'mongoose'
+import { Products } from './collections/Products/Products'
+import { Media } from './collections/Meida'
+import { ProductFiles } from './collections/ProductFile'
+import { Orders } from './collections/Orders'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,7 +42,7 @@ export default buildConfig({
       },
     }),
   }),
-  collections: [Users, Media],
+  collections: [Users, Products, Media, ProductFiles, Orders],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET! || '',
   typescript: {
