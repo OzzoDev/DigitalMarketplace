@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const perks = [
   {
-    name: 'Instant Devlivery',
+    name: 'Instant Delivery',
     icon: ArrowDownToLine,
     description: 'Get your assets deliered to your email in seconds and download them right away.',
   },

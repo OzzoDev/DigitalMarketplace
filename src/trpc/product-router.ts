@@ -13,46 +13,42 @@ export const productRouter = router({
       }),
     )
     .query(async ({ input }) => {
-      try {
-        const { query, cursor } = input
-        const { sort, limit, ...queryOpts } = query
+      const { query, cursor } = input
+      const { sort, limit, ...queryOpts } = query
 
-        const payload = await getPayloadClient()
+      const payload = await getPayloadClient()
 
-        const parsedQueryOpts: Record<string, { equals: string }> = {}
+      const parsedQueryOpts: Record<string, { equals: string }> = {}
 
-        Object.entries(queryOpts).forEach(([key, value]) => {
-          parsedQueryOpts[key] = {
-            equals: value,
-          }
-        })
-
-        const page = cursor || 1
-
-        const {
-          docs: items,
-          hasNextPage,
-          nextPage,
-        } = await payload.find({
-          collection: 'products',
-          where: {
-            approvedForSale: {
-              equals: 'approved',
-            },
-            ...parsedQueryOpts,
-          },
-          sort,
-          depth: 1,
-          limit,
-          page,
-        })
-
-        return {
-          items,
-          nextPage: hasNextPage ? nextPage : null,
+      Object.entries(queryOpts).forEach(([key, value]) => {
+        parsedQueryOpts[key] = {
+          equals: value,
         }
-      } catch (err) {
-        console.log(err)
+      })
+
+      const page = cursor || 1
+
+      const {
+        docs: items,
+        hasNextPage,
+        nextPage,
+      } = await payload.find({
+        collection: 'products',
+        where: {
+          approvedForSale: {
+            equals: 'approved',
+          },
+          ...parsedQueryOpts,
+        },
+        sort,
+        depth: 1,
+        limit,
+        page,
+      })
+
+      return {
+        items,
+        nextPage: hasNextPage ? nextPage : null,
       }
     }),
 })
