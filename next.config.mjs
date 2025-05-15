@@ -11,6 +11,16 @@ const nextConfig = {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src')
     return config
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'localhost',
+        pathname: '**',
+        port: '3000',
+        protocol: 'http',
+      },
+    ],
+  },
 }
 
 export default nextConfig
