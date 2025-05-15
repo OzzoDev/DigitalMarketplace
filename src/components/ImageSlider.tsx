@@ -1,14 +1,16 @@
+'use client'
+
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/pageination'
+import 'swiper/css/pagination'
 import type SwiperType from 'swiper'
 import { useEffect, useState } from 'react'
 import { Pagination } from 'swiper/modules'
 import { cn } from '@/lib/utils'
-import { ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-type ImageSliderProps = {
+interface ImageSliderProps {
   urls: string[]
 }
 
@@ -26,19 +28,18 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
       setActiveIndex(activeIndex)
       setSlideConfig({
         isBeginning: activeIndex === 0,
-        isEnd: activeIndex === (urls.length ?? 0 - 1),
+        isEnd: activeIndex === (urls.length ?? 0) - 1,
       })
     })
   }, [swiper, urls])
 
   const activeStyles =
-    'active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-sqaure h-8 w-8 z-50 place-items-center rounded-full border-2 bg-white border-zinc-300'
-
+    'active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-50 place-items-center rounded-full border-2 bg-white border-zinc-300'
   const inactiveStyles = 'hidden text-gray-400'
 
   return (
     <div className="group relative bg-zinc-100 aspect-square overflow-hidden rounded-xl">
-      <div className="absolute z-10 inset-0 opacity-0 group:hover:opacity-100 transition">
+      <div className="absolute z-10 inset-0 opacity-0 group-hover:opacity-100 transition">
         <button
           onClick={(e) => {
             e.preventDefault()
@@ -48,8 +49,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
             [inactiveStyles]: slideConfig.isEnd,
             'hover:bg-primary-300 text-primary-800 opacity-100': !slideConfig.isEnd,
           })}
+          aria-label="next image"
         >
-          <ChevronRight aria-label="next image" className="h-4 w-4 text-zinc-700" />
+          <ChevronRight className="h-4 w-4 text-zinc-700" />{' '}
         </button>
         <button
           onClick={(e) => {
@@ -60,8 +62,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
             [inactiveStyles]: slideConfig.isBeginning,
             'hover:bg-primary-300 text-primary-800 opacity-100': !slideConfig.isBeginning,
           })}
+          aria-label="previous image"
         >
-          <ChevronRight aria-label="previous image" className="h-4 w-4 text-zinc-700" />
+          <ChevronLeft className="h-4 w-4 text-zinc-700" />{' '}
         </button>
       </div>
 
@@ -77,15 +80,15 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
         slidesPerView={1}
         className="h-full w-full"
       >
-        {urls.map((url, index) => (
-          <SwiperSlide key={url + index} className="-z-10 relative h-full w-full">
+        {urls.map((url, i) => (
+          <SwiperSlide key={i} className="-z-10 relative h-full w-full">
             <Image
-              src={url}
-              alt="product image"
               fill
               loading="eager"
               className="-z-10 h-full w-full object-cover object-center"
-            ></Image>
+              src={url}
+              alt="Product image"
+            />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -18,21 +18,27 @@ const FALLBACK_LIMIT = 4
 const ProductReel = (props: ProductReelProps) => {
   const { title, subTitle, href, query } = props
 
-  const { data: queryResults, isLoading } = trpc.getInfiniteProducts.useInfiniteQuery(
+  const { data: queryResults, isLoading } = trpc.product.getInfiniteProducts.useInfiniteQuery(
     {
       limit: query.limit ?? FALLBACK_LIMIT,
       query,
     },
     {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
+      getNextPageParam: (lastPage) => lastPage?.nextPage,
     },
   )
 
-  const products = queryResults?.pages.flatMap((page) => page.items)
+  // if(!queryResults) return null
+
+  const products = queryResults?.pages.flatMap((page) => page?.items)
+
+  if (!products) {
+    return null
+  }
 
   let map: (Product | null)[] = []
   if (products && products.length) {
-    map = products
+    if (products) map = products as Product[]
   } else if (isLoading) {
     map = new Array<null>(query.limit ?? FALLBACK_LIMIT).fill(null)
   }
