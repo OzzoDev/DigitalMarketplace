@@ -66,7 +66,7 @@ const addUser: BeforeChangeHook = ({ req, data }) => {
 export const ProductFiles: CollectionConfig = {
   slug: 'product_files',
   admin: {
-    hidden: ({ user }) => user.role !== 'admin',
+    hidden: ({ user }) => user?.role !== 'admin',
   },
   hooks: {
     beforeChange: [addUser],
