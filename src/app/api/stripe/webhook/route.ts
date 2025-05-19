@@ -6,12 +6,6 @@ import { Resend } from 'resend'
 import type { Product } from '@/payload-types'
 import { stripe } from '../../../../lib/stripe'
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
-
 const resend = new Resend(process.env.RESEND_API_KEY)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
@@ -24,8 +18,8 @@ export async function POST(req: NextRequest) {
 
   try {
     event = stripe.webhooks.constructEvent(bodyBuffer, sig, webhookSecret)
-  } catch (err: any) {
-    return new Response(`Webhook Error: ${err.message}`, { status: 400 })
+  } catch (err: unknown) {
+    return new Response(`Webhook Error: ${err}`, { status: 400 })
   }
 
   const session = event.data.object as Stripe.Checkout.Session

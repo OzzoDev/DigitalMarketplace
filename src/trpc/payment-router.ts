@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { privateProcedure, publicProcedure, router } from './trpc'
+import { privateProcedure, router } from './trpc'
 import { TRPCError } from '@trpc/server'
 import { getPayloadClient } from '../lib/payload'
 import { stripe } from '../lib/stripe'
@@ -11,7 +11,7 @@ export const paymentRouter = router({
     .mutation(async ({ ctx, input }) => {
       const { userId } = ctx
 
-      let { productIds } = input
+      const { productIds } = input
 
       if (productIds.length === 0) {
         throw new TRPCError({ code: 'BAD_REQUEST' })

@@ -9,12 +9,13 @@ import { formatPrice } from '@/lib/utils'
 import Link from 'next/link'
 import PaymentStatus from '@/components/PaymentStatus'
 
-type PageProps = {
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-const ThankYouPage = async ({ searchParams }: PageProps) => {
-  const orderId = searchParams.orderId
+export default async function ThankYouPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedParams = await searchParams
+  const orderId = resolvedParams.orderId
   const nextCookies = await cookies()
 
   const { user } = await getServerSideUser(nextCookies)
@@ -167,5 +168,3 @@ const ThankYouPage = async ({ searchParams }: PageProps) => {
     </main>
   )
 }
-
-export default ThankYouPage

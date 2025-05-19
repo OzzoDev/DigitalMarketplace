@@ -13,8 +13,6 @@ const adminsAndUser: Access = ({ req: { user } }) => {
   }
 }
 
-PrimaryActionEmailHtml
-
 export const Users: CollectionConfig = {
   slug: 'users',
   auth: {

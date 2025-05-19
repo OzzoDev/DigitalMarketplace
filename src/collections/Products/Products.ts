@@ -14,9 +14,15 @@ const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
 }
 
 const syncUser: AfterChangeHook<Product> = async ({ req, doc }) => {
+  const userId = req.user?.id
+
+  if (!userId) {
+    throw new Error('User is not authenticated')
+  }
+
   const fullUser = await req.payload.findByID({
     collection: 'users',
-    id: req.user?.id!,
+    id: userId,
   })
 
   if (fullUser && typeof fullUser === 'object') {

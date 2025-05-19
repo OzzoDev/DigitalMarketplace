@@ -10,9 +10,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 type PageProps = {
-  params: {
+  params: Promise<{
     productId: string
-  }
+  }>
 }
 
 const BREADCRUMBS = [
@@ -21,7 +21,7 @@ const BREADCRUMBS = [
 ]
 
 const Page = async ({ params }: PageProps) => {
-  const { productId } = params
+  const { productId } = await params
 
   const payload = await getPayloadClient()
 

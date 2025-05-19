@@ -2,8 +2,8 @@ import payload, { Payload } from 'payload'
 import config from '../payload.config'
 
 declare global {
-  var cachedPayloadClient: Payload | undefined
-  var payloadInitialized: boolean | undefined
+  const cachedPayloadClient: Payload | undefined
+  const payloadInitialized: boolean | undefined
 }
 
 const globalForPayload = globalThis as typeof globalThis & {

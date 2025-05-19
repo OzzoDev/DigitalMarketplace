@@ -5,17 +5,17 @@ import { PRODUCT_CATEGORIES } from '@/config'
 type Param = string | string[] | undefined
 
 type ProductsPageProps = {
-  searchParams: { [key: string]: Param }
+  searchParams: Promise<{ [key: string]: Param }>
 }
 
 const parse = (param: Param) => {
   return typeof param === 'string' ? param : undefined
 }
 
-const ProductsPage = ({ searchParams }: ProductsPageProps) => {
-  const sort = parse(searchParams.sort)
-  const category = parse(searchParams.category)
-
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  const resolvedParams = await searchParams
+  const sort = parse(resolvedParams.sort)
+  const category = parse(resolvedParams.category)
   const label = PRODUCT_CATEGORIES.find(({ value }) => value === category)?.label
 
   return (
@@ -31,5 +31,3 @@ const ProductsPage = ({ searchParams }: ProductsPageProps) => {
     </MaxWidthWrapper>
   )
 }
-
-export default ProductsPage

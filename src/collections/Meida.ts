@@ -1,5 +1,4 @@
 import { User } from '@/payload-types'
-import { assert } from 'console'
 import { Access, CollectionConfig } from 'payload'
 
 const isAdminOrHasAccessToImages =
