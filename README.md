@@ -1,132 +1,137 @@
-Here's a well-structured `README.md` file based on the HTML content you provided:
-
 ````markdown
-<div align="center" style="text-align: center;">
-  <h1>DIGITALMARKETPLACE</h1>
-  <em>Empowering seamless digital commerce experiences for everyone.</em>
+<div align="center">
 
-  <br /><br />
+# 🛍️ DIGITALMARKETPLACE  
+**Empowering seamless digital commerce experiences for everyone.**
 
-  ![last-commit](./GitDocify_files/DigitalMarketplace)
-  ![repo-top-language](./GitDocify_files/DigitalMarketplace(1))
-  ![repo-language-count](./GitDocify_files/DigitalMarketplace(2))
+---
 
-  <br /><br />
-  <em>Built with the tools and technologies:</em>
+<img src="./GitDocify_files/DigitalMarketplace" alt="last-commit" />
+<img src="./GitDocify_files/DigitalMarketplace(1)" alt="top-language" />
+<img src="./GitDocify_files/DigitalMarketplace(2)" alt="language-count" />
 
-  <br />
+---
 
-  ![JSON](./GitDocify_files/JSON-000000.svg)
-  ![Resend](./GitDocify_files/Resend-000000.svg)
-  ![npm](./GitDocify_files/npm-CB3837.svg)
-  ![PostCSS](./GitDocify_files/PostCSS-DD3A0A.svg)
-  ![Prettier](./GitDocify_files/Prettier-F7B93E.svg)
-  ![.ENV](./GitDocify_files/ENV-ECD53F.svg)
-  ![JavaScript](./GitDocify_files/JavaScript-F7DF1E.svg)
-  ![sharp](./GitDocify_files/sharp-99CC00.svg)
-  ![React](./GitDocify_files/React-61DAFB.svg)
-  ![Docker](./GitDocify_files/Docker-2496ED.svg)
-  ![TypeScript](./GitDocify_files/TypeScript-3178C6.svg)
-  ![Zod](./GitDocify_files/Zod-3E67B1.svg)
-  ![Stripe](./GitDocify_files/Stripe-635BFF.svg)
-  ![ESLint](./GitDocify_files/ESLint-4B32C3.svg)
-  ![Swiper](./GitDocify_files/Swiper-6332F6.svg)
-  ![datefns](./GitDocify_files/datefns-770C56.svg)
-  ![GraphQL](./GitDocify_files/GraphQL-E10098.svg)
-  ![React Hook Form](./GitDocify_files/React Hook Form-EC5990.svg)
 </div>
 
----
+## ✨ Overview
 
-## Table of Contents
+**DigitalMarketplace** is a modern, full-stack e-commerce boilerplate built with developer experience and performance in mind. It leverages the **best-in-class tools and practices** for shipping scalable, maintainable, and secure digital storefronts.
 
-- [Overview](#overview)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Testing](#testing)
+### 🔥 Key Technologies
 
----
-
-## Overview
-
-**DigitalMarketplace** is a powerful developer tool designed to streamline the creation and management of e-commerce applications. Unlock the potential of your digital storefront with this comprehensive solution that leverages modern technologies and best practices.
-
-### Why DigitalMarketplace?
-
-This project empowers developers to build feature-rich online marketplaces efficiently. Key features include:
-
-- 🐳 **Docker Integration**: Simplifies the setup of a development environment, allowing developers to focus on coding rather than configuration.
-- 📦 **Payload CMS**: Provides a robust content management system, enabling easy management of users, products, and orders.
-- 🔍 **TypeScript Support**: Enhances code quality and maintainability through strict type-checking and modern JavaScript features.
-- 🎨 **Tailwind CSS Integration**: Streamlines styling with utility-first CSS, promoting a consistent and responsive design.
-- 🔗 **TRPC for API Management**: Facilitates seamless communication between frontend and backend, enhancing data fetching and state management.
-- 🔐 **User Authentication**: Ensures secure access control and user management, improving overall application security.
+| Core Stack | Description |
+|------------|-------------|
+| [**Next.js**](https://nextjs.org/) | React framework for full-stack web apps with hybrid rendering |
+| [**TypeScript**](https://www.typescriptlang.org/) | Static typing for better DX, safety, and scalability |
+| [**Tailwind CSS**](https://tailwindcss.com/) | Utility-first CSS for rapid UI development |
+| [**Payload CMS**](https://payloadcms.com/) | Headless CMS to manage content, users, and products |
+| [**tRPC**](https://trpc.io/) | End-to-end typesafe APIs (no schema duplication) |
+| [**Stripe**](https://stripe.com/) | Modern payment infrastructure for global transactions |
 
 ---
 
-## Getting Started
+## 📦 Features
 
-### Prerequisites
+- ⚡ **Next.js App Router** with standalone output and optimized build strategy  
+- 🧩 **Payload CMS** integration for robust backend + admin panel  
+- 🔒 **Secure authentication** and role-based access  
+- 🔁 **Type-safe fullstack development** via **tRPC**  
+- 🎨 Beautiful, responsive design with **Tailwind CSS**  
+- 💸 Seamless **Stripe Checkout** for product purchases  
+- 🐳 **Docker-ready** deployment for local and cloud environments  
+- 📐 Code formatting with **Prettier** and **ESLint**  
+- 🧪 Flexible testing setup (add your preferred framework)  
 
-Make sure you have the following installed:
+---
 
-- **Programming Language**: TypeScript
-- **Package Manager**: npm
-- **Container Runtime**: Docker
+## 🚀 Getting Started
 
-### Installation
+### 🔧 Prerequisites
 
-Build DigitalMarketplace from the source and install dependencies:
+Ensure the following are installed:
 
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/OzzoDev/DigitalMarketplace
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [Docker](https://www.docker.com/) (for containerization)
+- [npm](https://www.npmjs.com/) or [pnpm/yarn]
+
+---
+
+### 📥 Installation
+
+Clone and install dependencies:
+
+```bash
+git clone https://github.com/OzzoDev/DigitalMarketplace
+cd DigitalMarketplace
 ````
 
-2. **Navigate to the project directory**:
+#### Using **Docker** (recommended for production):
 
-   ```sh
-   cd DigitalMarketplace
-   ```
-
-3. **Install the dependencies**:
-
-#### Using [Docker](https://www.docker.com/):
-
-```sh
-docker build -t OzzoDev/DigitalMarketplace .
+```bash
+docker build -t digitalmarketplace .
+docker run -p 3000:3000 digitalmarketplace
 ```
 
-#### Using [npm](https://www.npmjs.com/):
+#### Or with **npm** for local dev:
 
-```sh
+```bash
 npm install
+npm run dev
 ```
 
-### Usage
+---
 
-#### Using Docker:
+## 🧪 Testing
 
-```sh
-docker run -it digitalmarketplace
+> *You can integrate any testing framework like Jest, Vitest, Playwright, etc.*
+
+#### Docker:
+
+```bash
+# Replace with your actual test script
+docker exec -it digitalmarketplace npm test
 ```
 
-#### Using npm:
+#### Local:
 
-```sh
-npm start
-```
-
-#### Using Docker:
-
-```sh
-echo 'INSERT-TEST-COMMAND-HERE'
-```
-
-#### Using npm:
-
-```sh
+```bash
 npm test
+```
+
+---
+
+## 🧱 Tech Stack Badges
+
+<img src="./GitDocify_files/TypeScript-3178C6.svg" />
+<img src="./GitDocify_files/React-61DAFB.svg" />
+<img src="./GitDocify_files/TailwindCSS-38B2AC.svg" />
+<img src="./GitDocify_files/Stripe-635BFF.svg" />
+<img src="./GitDocify_files/GraphQL-E10098.svg" />
+<img src="./GitDocify_files/PostCSS-DD3A0A.svg" />
+<img src="./GitDocify_files/ESLint-4B32C3.svg" />
+<img src="./GitDocify_files/Prettier-F7B93E.svg" />
+<img src="./GitDocify_files/ENV-ECD53F.svg" />
+<img src="./GitDocify_files/Docker-2496ED.svg" />
+<img src="./GitDocify_files/Resend-000000.svg" />
+<img src="./GitDocify_files/Zod-3E67B1.svg" />
+<img src="./GitDocify_files/React Hook Form-EC5990.svg" />
+
+---
+
+## 🧠 Philosophy
+
+This project is built around the idea of **developer-first tooling** and **future-proof architecture**:
+
+* Minimal config, maximum output
+* Full control with no lock-in
+* Best practices for frontend, backend, and DevOps
+* No REST or GraphQL boilerplate — just **tRPC magic**
+
+---
+
+## 📄 License
+
+MIT © [OzzoDev](https://github.com/OzzoDev)
+
 ```
