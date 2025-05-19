@@ -30,24 +30,6 @@ A modern digital marketplace built with **Next.js 14**, **TypeScript**, **tRPC**
 
 ---
 
-## 📁 Project Structure
-
-```
-
-/
-├── app/                 # App Router (routes, layouts, pages)
-├── components/          # Reusable UI components
-├── server/              # tRPC routers and backend logic
-├── payload/             # Payload CMS config & collections
-├── styles/              # Tailwind config and globals
-├── utils/               # Helper functions
-├── public/              # Static assets
-└── .env.local           # Environment variables
-
-````
-
----
-
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
